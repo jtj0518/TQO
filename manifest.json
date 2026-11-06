@@ -2,7 +2,7 @@
   "name": "Ternary Quadgram Oracle",
   "short_name": "Oracle",
   "description": "3 Energies, 9 Bigrams, 81 Quadgrams Divination System",
-  "start_url": "./index.html",
+  "start_url": "./ternary_quadgram_oracle_widget.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
