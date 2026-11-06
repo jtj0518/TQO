@@ -1,0 +1,19 @@
+{
+  "name": "Ternary Quadgram Oracle",
+  "short_name": "Oracle",
+  "description": "3 Energies, 9 Bigrams, 81 Quadgrams Divination System",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0d0f12",
+  "theme_color": "#0d0f12",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%230d0f12'/%3E%3Cpath d='M256 90 L256 422 M160 170 C160 290 352 290 352 170 M130 422 L382 422' stroke='%23609D9C' stroke-width='38' stroke-linecap='round' fill='none'/%3E%3C/svg%3E",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
