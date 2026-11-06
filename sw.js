@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ternary-oracle-v1';
+const CACHE_NAME = 'ternary-oracle-v3';
 const ASSETS_TO_CACHE = [
   './',
   './ternary_quadgram_oracle_widget.html',
