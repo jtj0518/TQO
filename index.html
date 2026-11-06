@@ -376,7 +376,7 @@
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js').catch((err) => {
-          console.warn('SW registration skipped (running local file protocol):', err);
+          console.warn('SW registration skipped:', err);
         });
       });
     }
@@ -620,12 +620,18 @@
       castingStatus.innerText = "Invoking the three energies...";
 
       setTimeout(() => {
-        const lines = [rollLineState(), rollLineState(), rollLineState(), rollLineState()];
-        lastCastLines = lines;
-        renderCastingView(lines);
-        btnCast.classList.remove('rolling');
-        btnCast.disabled = false;
-        castingStatus.innerText = "Consultation complete. Read the glyph and counsel below.";
+        try {
+          const lines = [rollLineState(), rollLineState(), rollLineState(), rollLineState()];
+          lastCastLines = lines;
+          renderCastingView(lines);
+          castingStatus.innerText = "Consultation complete. Read the glyph and counsel below.";
+        } catch (e) {
+          console.error("Cast Error: ", e);
+          castingStatus.innerText = "Error completing consultation. Check console.";
+        } finally {
+          btnCast.classList.remove('rolling');
+          btnCast.disabled = false;
+        }
       }, 400);
     });
 
@@ -704,7 +710,7 @@
         vectorPills.innerHTML = lines
           .map((l, idx) => {
             if (!l.moving) return '';
-            let moveType = l.moving === 'materia' ? `→ Materia [${l.symbol}]` : (l.moving === 'persona' ? `→ Persona [${l.symbol}]` : `→ Anima [${l.symbol}]`);
+            const moveType = l.moving === 'materia' ? `→ Materia [${l.symbol}]` : (l.moving === 'persona' ? `→ Persona [${l.symbol}]` : `→ Anima [${l.symbol}]`);
             return `<span class="border text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded bg-amber-950/40 border-amber-700/50 text-amber-200">L${idx + 1}: ${moveType}</span>`;
           })
           .filter(Boolean)
@@ -714,14 +720,14 @@
       }
 
       auditCards.innerHTML = lines.map((l, i) => {
-        let baseColor = currentTheme === 'mono' ? 'text-white font-bold' : (l.energy === 'materia' ? 'text-materia-light font-bold' : (l.energy === 'persona' ? 'text-persona-light font-bold' : 'text-anima-light font-bold'));
+        const baseColor = currentTheme === 'mono' ? 'text-white font-bold' : (l.energy === 'materia' ? 'text-materia-light font-bold' : (l.energy === 'persona' ? 'text-persona-light font-bold' : 'text-anima-light font-bold'));
         const moveLabel = l.moving ? `<span class="text-amber-300 font-bold block text-[9px] sm:text-[10px]">→ ${capitalize(l.moving)} [${l.symbol}]</span>` : '<span class="text-slate-400 block text-[9px] sm:text-[10px]">Static</span>';
         
         return `
           <div class="bg-surface p-1.5 sm:p-2 rounded-lg border border-slate-800 flex flex-col justify-between">
             <div>
               <div class="text-[9px] sm:text-[10px] text-slate-400 font-bold">Line ${i + 1}</div>
-              <div class="text-[9px] sm:text-[10px] text-slate-400 font-mono mt-0.5">${l.dA},${l.dB}</div>
+              <div class="text-[9px] sm:text-[10px] text-slate-400 font-mono mt-0.5">D_A:${l.dA} | D_B:${l.dB}</div>
             </div>
             <div class="my-1 ${baseColor} text-[10px] sm:text-[11px]">${capitalize(l.energy)}</div>
             <div>${moveLabel}</div>
