@@ -1,7 +1,7 @@
 const CACHE_NAME = 'ternary-oracle-v3';
 const ASSETS_TO_CACHE = [
   './',
-  './ternary_quadgram_oracle_widget.html',
+  './index.html',
   './manifest.json',
   'https://cdn.tailwindcss.com',
   'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap'
